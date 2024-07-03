@@ -1,0 +1,19 @@
+main: de.c4vxl.Vehicles
+version: 1.0-RV-B1
+api-version: 1.14                   # plugin supports 1.14+
+
+name: Vehicles
+description: This Plugin adds custom vehicles to the game!
+
+author: c4vxl
+website: https://c4vxl.de/
+
+commands:
+  spawnvehicle:
+    aliases: [sv]
+    permission: c4vxl.plugin.vehicles.permissions.cmd.spawnvehicle
+    permission-message: §c§lI am sorry! §r§cBut it seems like you are not allowed to perform this action!
+    usage: /spawnvehicle [small/large] [speed_values] [gravitation_factor] [custom_model_data] [model_item_type]
+
+libraries:
+  - org.jetbrains.kotlin:kotlin-stdlib:2.0.0
