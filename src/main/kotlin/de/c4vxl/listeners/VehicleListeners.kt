@@ -96,32 +96,22 @@ class VehicleListeners(plugin: JavaPlugin): Listener {
         if (player.isOnVehicleEntity) return
 
         // return if player is sneaking
-        if (player.isSneaking) return
+        if (player.isSneaking) {
+            player.inventory.addItem(vehicle.displayItem.apply {
+                this.editMeta {
+                    it.displayName(
+                        Component.text("Right click to spawn the vehicle")
+                            .color(NamedTextColor.GOLD)
+                            .decorate(TextDecoration.BOLD)
+                    )
+                }
+            })
 
-        vehicle.mountDriver(player)
+            vehicle.remove()
+        }
+        else vehicle.mountDriver(player)
 
         event.isCancelled = true
-    }
-
-    @EventHandler
-    fun onVehicleHit(event: PrePlayerAttackEntityEvent) {
-        val player: Player = event.player
-        val vehicle: VehicleEntity = event.attacked.asVehicleEntity ?: return
-
-        // return if player is driving
-        if (player.isOnVehicleEntity) return
-
-        player.inventory.addItem(vehicle.displayItem.apply {
-            this.editMeta {
-                it.displayName(
-                    Component.text("Right click to spawn the vehicle")
-                        .color(NamedTextColor.GOLD)
-                        .decorate(TextDecoration.BOLD)
-                )
-            }
-        })
-
-        vehicle.remove()
     }
 
     @EventHandler
