@@ -1,8 +1,8 @@
 package de.c4vxl.commands
 
 import de.c4vxl.vehicle.VehicleEntity
-import de.c4vxl.vehicle.VehicleModel
-import de.c4vxl.vehicle.VehicleModels
+import de.c4vxl.model.VehicleModel
+import de.c4vxl.model.VehicleModels
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.entity.Player

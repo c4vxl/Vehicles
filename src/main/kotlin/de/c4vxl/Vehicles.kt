@@ -2,7 +2,7 @@ package de.c4vxl
 
 import de.c4vxl.commands.SpawnVehicleCommand
 import de.c4vxl.listeners.VehicleListeners
-import de.c4vxl.vehicle.VehicleModels
+import de.c4vxl.model.VehicleModels
 import org.bukkit.Material
 import org.bukkit.plugin.java.JavaPlugin
 

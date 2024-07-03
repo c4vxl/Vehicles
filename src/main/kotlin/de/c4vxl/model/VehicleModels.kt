@@ -1,4 +1,4 @@
-package de.c4vxl.vehicle
+package de.c4vxl.model
 
 import org.bukkit.Material
 import org.bukkit.configuration.file.YamlConfiguration
