@@ -142,7 +142,7 @@ class VehicleListeners(plugin: JavaPlugin): Listener {
 
         // spawn vehicle
         vehicle.spawn(spawnLocation)?.apply {
-            this.displayItem = item.clone() // clone custom item properties
+            this.displayItem = item.clone().apply { this.amount = 1 } // clone custom item properties
             this.displayItemHolder.setRotation(event.player.yaw, this.displayItemHolder.pitch) // align player's x-rotation
         }
 
