@@ -171,8 +171,7 @@ class VehicleListeners(plugin: JavaPlugin): Listener {
     }
 
     @EventHandler
-    fun onDisable(event: PluginDisableEvent) {
-        // dismount all drivers from their vehicles
-        Bukkit.getOnlinePlayers().forEach { it.vehicleEntity?.dismountDriver() }
+    fun beforeDisable(event: PluginDisableEvent) {
+        Bukkit.getOnlinePlayers().forEach { it.leaveVehicle() } // force all players to dismount their vehicles
     }
 }
