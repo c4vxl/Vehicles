@@ -1,6 +1,8 @@
 package de.c4vxl.commands
 
 import de.c4vxl.vehicle.VehicleEntity
+import de.c4vxl.vehicle.VehicleModel
+import de.c4vxl.vehicle.VehicleModels
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.entity.Player
@@ -29,8 +31,9 @@ class SpawnVehicleCommand(plugin: JavaPlugin) {
                 val isSmall: Boolean = args.getOrNull(0).contentEquals("small")
                 val controlSpeeds: String = args.getOrElse(1) { "0.01,0.2,2" }
                 val gravityFactor: Double = args.getOrElse(2) { "gravityFactor:1" }.lowercase(Locale.getDefault()).removePrefix("gravityfactor:").toDoubleOrNull() ?: 1.8
-                val model: Int = args.getOrNull(3)?.toIntOrNull() ?: 0
-                val itemMaterial: Material = Material.entries.find { it.name == args.getOrNull(4) } ?: Material.DIAMOND
+                val model: Int = args.getOrNull(3)?.let { it.toIntOrNull() ?: VehicleModels.model.getOrDefault(it, VehicleModel("", 0)).customModelData } ?: 0
+
+                val itemMaterial: Material = Material.entries.find { it.name == args.getOrNull(4) } ?: VehicleModels.model[args.getOrNull(3)]?.material ?: Material.DIAMOND
 
                 VehicleEntity.spawn(location, isSmall, gravityFactor, model, itemMaterial)?.apply {
                     this.displayItem = this.displayItem.clone().apply {
@@ -52,7 +55,8 @@ class SpawnVehicleCommand(plugin: JavaPlugin) {
                         1 -> this.addAll(mutableListOf("small", "large", "help"))
                         2 -> this.addAll(mutableListOf("0.01,0.4,2.0", "0.03,0.5"))
                         3 -> this.addAll(mutableListOf("gravityFactor:", "gravityFactor:1", "gravityFactor:1.3", "gravityFactor:1.7", "gravityFactor:2", "gravityFactor:3"))
-                        5 -> this.addAll(Material.entries.map { it.name })
+                        4 -> this.addAll(VehicleModels.model.keys)
+                        5 -> this.addAll(VehicleModels.model[args.getOrNull(3)]?.let { mutableListOf(it.material.name) } ?: Material.entries.map { it.name })
                     }
                 }
             }
